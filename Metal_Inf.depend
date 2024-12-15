@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1733321591 source:c:\users\calvin\documents\metal inf\metal_inf\filemanager.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+	<locale.h>
+
+1732630652 c:\users\calvin\documents\metal inf\metal_inf\gerenciador_header.h
+	"raylib.h"
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1732042194 c:\users\calvin\documents\metal inf\metal_inf\gerenciador_func.h
+	"raylib.h"
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1584205420 source:c:\users\calvin\documents\metal inf\metal_inf\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1733321381 source:c:\users\calvin\documents\metal inf\metal_inf\drawings.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+

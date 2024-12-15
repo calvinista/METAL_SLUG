@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Metal_Inf" />
+		<Option pch_mode="2" />
+		<Option compiler="raylib" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Metal_Inf" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="raylib" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Metal_Inf" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="raylib" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Metal_Inf.cbp" />
+		<Unit filename="Sprites/PLAYER/BulletUp.png" />
+		<Unit filename="Sprites/PLAYER/RegAttack.png" />
+		<Unit filename="Sprites/PLAYER/Title.gif" />
+		<Unit filename="Sprites/PLAYER/crounch_shooting.png" />
+		<Unit filename="Sprites/PLAYER/jumpingUp.png" />
+		<Unit filename="Sprites/PLAYER/knife.png" />
+		<Unit filename="Sprites/PLAYER/looing_up.png" />
+		<Unit filename="Sprites/PLAYER/player_direction.png" />
+		<Unit filename="Sprites/PLAYER/shooting.png" />
+		<Unit filename="Sprites/PLAYER/standing.png" />
+		<Unit filename="Sprites/PLAYER/victory.png" />
+		<Unit filename="Sprites/PLAYER/walking.png" />
+		<Unit filename="drawings.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="fileManager.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="gerenciador_func.h" />
+		<Unit filename="gerenciador_header.h" />
+		<Unit filename="jogador.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
