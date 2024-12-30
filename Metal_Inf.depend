@@ -4,25 +4,72 @@
 	"gerenciador_func.h"
 	<locale.h>
 
-1732630652 c:\users\calvin\documents\metal inf\metal_inf\gerenciador_header.h
+1735496135 c:\users\calvin\documents\metal inf\metal_inf\gerenciador_header.h
 	"raylib.h"
 	<math.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1732042194 c:\users\calvin\documents\metal inf\metal_inf\gerenciador_func.h
+1735478123 c:\users\calvin\documents\metal inf\metal_inf\gerenciador_func.h
 	"raylib.h"
 	<math.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1584205420 source:c:\users\calvin\documents\metal inf\metal_inf\main.c
+1735495932 source:c:\users\calvin\documents\metal inf\metal_inf\main.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+
+1735134293 source:c:\users\calvin\documents\metal inf\metal_inf\drawings.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+
+1735476853 source:c:\users\calvin\documents\metal inf\metal_inf\leitormapa.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+
+1735583543 source:c:\users\calvin\documents\metal inf\metal inf\metal_inf\drawings.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+
+1735569392 c:\users\calvin\documents\metal inf\metal inf\metal_inf\gerenciador_header.h
+	"raylib.h"
+	<math.h>
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 
-1733321381 source:c:\users\calvin\documents\metal inf\metal_inf\drawings.c
+1735579821 c:\users\calvin\documents\metal inf\metal inf\metal_inf\gerenciador_func.h
+	"raylib.h"
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1733321590 source:c:\users\calvin\documents\metal inf\metal inf\metal_inf\filemanager.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+	<locale.h>
+
+1735557284 source:c:\users\calvin\documents\metal inf\metal inf\metal_inf\leitormapa.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+
+1735560502 source:c:\users\calvin\documents\metal inf\metal inf\metal_inf\main.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+
+1735582933 source:c:\users\calvin\documents\metal inf\metal inf\metal_inf\jogador.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+
+1735562178 source:c:\users\calvin\documents\metal inf\metal inf\metal_inf\structurefiller.c
+	"gerenciador_header.h"
+	"gerenciador_func.h"
+
+1735580006 source:c:\users\calvin\documents\metal inf\metal inf\metal_inf\interaction.c
 	"gerenciador_header.h"
 	"gerenciador_func.h"
 
