@@ -3,13 +3,13 @@
 
 //=========================================================================================
 /* DesenhaMenu: Cena_t, int -> void
-  FunÁ„o para desenhar o menu na tela.
+  Fun√ß√£o para desenhar o menu na tela.
 
-Par‚metros:
-  - cena (Cena_t): Estrutura contendo os dados da cena, como texturas e botıes.
-  - n (int): N˙mero de botıes a serem desenhados.
+Par√¢metros:
+  - cena (Cena_t): Estrutura contendo os dados da cena, como texturas e bot√µes.
+  - n (int): N√∫mero de bot√µes a serem desenhados.
 Objetivo:
-  Desenha o background, o tÌtulo e os botıes do menu na tela.
+  Desenha o background, o t√≠tulo e os bot√µes do menu na tela.
 */
 //=========================================================================================
 void DesenhaMenu(Cena_t cena, int n)
@@ -27,13 +27,13 @@ void DesenhaMenu(Cena_t cena, int n)
 }
 //=========================================================================================
 /* DesenhaFase: Fase_t, int -> void
-  FunÁ„o para desenhar a fase do jogo na tela.
+  Fun√ß√£o para desenhar a fase do jogo na tela.
 
-Par‚metros:
+Par√¢metros:
   - fase (Fase_t): Estrutura contendo os dados da fase, como mapa e tamanho dos blocos.
-  - cooldown (int): Flag para indicar se o cooldown est· ativo.
+  - cooldown (int): Flag para indicar se o cooldown est√° ativo.
 Objetivo:
-  Desenha os blocos da fase, incluindo obst·culos, pontos de inÌcio e fim, e moedas (dependendo do cooldown).
+  Desenha os blocos da fase, incluindo obst√°culos, pontos de in√≠cio e fim, e moedas (dependendo do cooldown).
 */
 //=========================================================================================
 /*void DesenhaFase(Fase_t fase, int cooldown)
@@ -43,12 +43,20 @@ Objetivo:
         for(int j=0; j<fase.columnSize; j++)
         {
             Rectangle rect = {j*fase.tamBloco, i*fase.tamBloco, fase.tamBloco, fase.tamBloco};
+            // BLOCOS TRANSPARENTES (SERVEM COMO SUPERF√çCIE P/ AS PLATAFORMAS NO FUNDO DA FASE)
             if(fase.mapa[i][j] = 'B')
             {
                 DrawRectangleRec(rect, BLANK);
-                DrawRectangleLinesEx(rect, 2, DARKGRAY);
+                DrawRectangleLinesEx(rect, 2, BLANK);
             }
-            if(fase.mapa[i][j]=='')
+            // OBSTACULO
+            if(fase.mapa[i][j]=='O')
+            {
+                DrawRectangle(rect, BLANK);
+                DrawRectangleLines(rect, 2, BLANK);
+            }
+            // ITEM
+            if(fase.mapa)
 
         }
     }
@@ -56,18 +64,17 @@ Objetivo:
 
 //=========================================================================================
 /* DesenhaTelaInput: Nome_t, Tela_t -> void
-  FunÁ„o para desenhar a tela de entrada de nome na tela.
+  Fun√ß√£o para desenhar a tela de entrada de nome na tela.
 
-Par‚metros:
+Par√¢metros:
   - dados (Nome_t): Estrutura contendo os dados de entrada do nome.
-  - param (Tela_t): Estrutura contendo os par‚metros da tela, como largura e altura.
+  - param (Tela_t): Estrutura contendo os par√¢metros da tela, como largura e altura.
 Objetivo:
-  Desenha as instruÁıes para o usu·rio, a caixa de texto para inserÁ„o do nome, e mensagens de confirmaÁ„o ou aviso.
+  Desenha as instru√ß√µes para o usu√°rio, a caixa de texto para inser√ß√£o do nome, e mensagens de confirma√ß√£o ou aviso.
 */
 //=========================================================================================
-void DesenhaTelaInput(Nome_t dados, Tela_t param)
-{
-    const char *congrats = "ParabÈns soldado(a)! VocÍ entrou no Top 5 da fase!";
+void DesenhaTelaInput(Nome_t dados, Tela_t param){
+    const char *congrats = "Parab√©ns soldado(a)! Voc√™ entrou no Top 5 da fase!";
     const char *inst = "Coloque o mouse sobre barra de texto";
     const char *confirm = "Pressione ENTER para enviar seu recorde!";
     const char *warning = "Pressione BACKSPACE para deletar letras...";
@@ -124,20 +131,19 @@ void DesenhaTelaInput(Nome_t dados, Tela_t param)
 }
 //=========================================================================================
 /* DesenhaScores: Scores_t, int -> void
-  FunÁ„o para desenhar os scores na tela.
+  Fun√ß√£o para desenhar os scores na tela.
 
-Par‚metros:
+Par√¢metros:
   - leaderboards (Scores_t): Estrutura contendo os dados do leaderboard.
-  - i (int): Õndice do nÌvel que est· sendo exibido.
+  - i (int): √çndice do n√≠vel que est√° sendo exibido.
 Objetivo:
-  Desenha a lista de melhores scores para o nÌvel selecionado, junto com os botıes de retorno e reset.
+  Desenha a lista de melhores scores para o n√≠vel selecionado, junto com os bot√µes de retorno e reset.
 */
 //=========================================================================================
-void DesenhaScores(Scores_t leaderboards, int i)
-{
+void DesenhaScores(Scores_t leaderboards, int i){
     if(leaderboards.desenhaScore)
     {
-        //PR…-ALINHAMENTO NO CENTRO DA TELA
+        //PR√â-ALINHAMENTO NO CENTRO DA TELA
         int y = SCREEN_HEIGHT / 4 + 80;
         int fontSize = 40;
 
@@ -146,7 +152,7 @@ void DesenhaScores(Scores_t leaderboards, int i)
             0, y, SCREEN_WIDTH, SCREEN_HEIGHT - y
         }, BLACK);
 
-        // FASES E PONTUA«√O
+        // FASES E PONTUA√á√ÉO
         char levelText[50];
         snprintf(levelText, sizeof(levelText), "Level %d", leaderboards.fases[i].level_id);
         int textWidth = MeasureText(levelText, fontSize);
@@ -176,14 +182,49 @@ void DesenhaScores(Scores_t leaderboards, int i)
     }
 }
 //=========================================================================================
-/* AnimationMenu: Cena_t*, Vector2 -> void
-  FunÁ„o para animar os elementos do menu.
+/* PaginationControl: Scores_t* -> void
+  Fun√ß√£o para controlar a navega√ß√£o entre p√°ginas do leaderboard.
 
-Par‚metros:
-  - cena (Cena_t*): Ponteiro para a estrutura contendo os dados da cena.
-  - mousePos (Vector2): PosiÁ„o atual do mouse.
+Par√¢metros:
+  - leaderboards (Scores_t*): Ponteiro para a estrutura contendo os dados do leaderboard.
 Objetivo:
-  Atualiza a cor dos textos e o estado de hover dos botıes com base na posiÁ„o do mouse.
+  Permite a navega√ß√£o entre as p√°ginas do leaderboard utilizando as teclas de seta esquerda e direita.
+*/
+//=========================================================================================
+void PaginationControl(Scores_t *leaderboards){
+
+  if(IsKeyPressed(KEY_RIGHT))
+    {
+        if(leaderboards->pagina == 4)
+        {
+          leaderboards->pagina = 4;
+        } else
+        {
+          leaderboards->pagina++;
+        }
+  }
+
+  if(IsKeyPressed(KEY_LEFT))
+  {
+        if(leaderboards->pagina == 0)
+        {
+          leaderboards->pagina = 0;
+        }
+        else
+        {
+          leaderboards->pagina--;
+        }
+  }
+}
+//=========================================================================================
+/* AnimationMenu: Cena_t*, Vector2 -> void
+  Fun√ß√£o para animar os elementos do menu.
+
+Par√¢metros:
+  - cena (Cena_t*): Ponteiro para a estrutura contendo os dados da cena.
+  - mousePos (Vector2): Posi√ß√£o atual do mouse.
+Objetivo:
+  Atualiza a cor dos textos e o estado de hover dos bot√µes com base na posi√ß√£o do mouse.
 */
 //=========================================================================================
 void AnimationMenu(Cena_t *cena, Vector2 mousePos)
@@ -233,19 +274,19 @@ void AnimationMenu(Cena_t *cena, Vector2 mousePos)
                 CreateBinaryFile("records.bin");
             }
         }
-        //   PaginationControl(&cena->scores);
+           PaginationControl(&cena->scores);
     }
 }
 //=========================================================================================
 /* DesenhaSeletorFase: int*, Tela_t, Gerenciador_e* -> void
-  FunÁ„o para desenhar o seletor de nÌvel na tela.
+  Fun√ß√£o para desenhar o seletor de n√≠vel na tela.
 
-Par‚metros:
-  - selectedLevel (int*): Ponteiro para a vari·vel que armazena o nÌvel selecionado.
-  - param (Tela_t): Estrutura contendo os par‚metros da tela, como largura e altura.
-  - gerenciador (Gerenciador_e*): Ponteiro para a vari·vel que gerencia o estado atual do jogo.
+Par√¢metros:
+  - selectedLevel (int*): Ponteiro para a vari√°vel que armazena o n√≠vel selecionado.
+  - param (Tela_t): Estrutura contendo os par√¢metros da tela, como largura e altura.
+  - gerenciador (Gerenciador_e*): Ponteiro para a vari√°vel que gerencia o estado atual do jogo.
 Objetivo:
-  Desenha os botıes de seleÁ„o de nÌvel na tela e permite o jogador selecionar um nÌvel ou voltar ao menu principal.
+  Desenha os bot√µes de sele√ß√£o de n√≠vel na tela e permite o jogador selecionar um n√≠vel ou voltar ao menu principal.
 */
 //=========================================================================================
 void DesenhaSeletorFase(int *selectedLevel, Tela_t param, Gerenciador_e *gerenciador)
@@ -258,7 +299,7 @@ void DesenhaSeletorFase(int *selectedLevel, Tela_t param, Gerenciador_e *gerenci
     int buttonWidth = 200;
     int buttonHeight = 60;
     int spacing = 20;
-    //CALCULO POSICIONAL E DE ESPA«AMENTO DOS BOT’ES HORIZONTALMENTE
+    //CALCULO POSICIONAL E DE ESPA√áAMENTO DOS BOT√ïES HORIZONTALMENTE
     int totalWidth = numFase*(buttonWidth+spacing) - spacing;
     int startX = (param.largura - totalWidth);
     int buttonY = param.altura / 2 - buttonHeight / 2;
@@ -328,12 +369,46 @@ void DesenhaSeletorFase(int *selectedLevel, Tela_t param, Gerenciador_e *gerenci
     }
 }
 //=========================================================================================
-/* DesenharJogador: Jogador_t, Rectangle -> void
-  FunÁ„o para desenhar o jogador na tela.
+/* DesenhaFundoParallax: Texture2D, Vector2, Tela_t -> void
+  Fun√ß√£o para desenhar o fundo com efeito parallax.
 
-Par‚metros:
+Par√¢metros:
+  - background (Texture2D): Textura do fundo a ser desenhada.
+  - counter (Vector2): Vetor contendo os valores de deslocamento horizontal e vertical para o efeito parallax.
+  - param (Tela_t): Estrutura contendo os par√¢metros da tela, como largura e altura.
+Objetivo:
+  Desenha o fundo na tela com um efeito de parallax, criando a ilus√£o de movimento ao longo de eixos.
+*/
+//=========================================================================================
+void DesenhaFndoParallax(Texture2D background, Vector2 counter, Tela_t param)
+{
+    DrawTextureNPatch
+    (
+        background,
+        (NPatchInfo){(Rectangle){0,0, background.width, background.height}, NPATCH_NINE_PATCH},
+        (Rectangle) {floor(0+counter.x), 0, param.largura, param.altura},
+        (Vector2){0,0},
+        0,
+        WHITE
+    );
+
+    DrawTextureNPatch
+    (
+        background,
+        (NPatchInfo){(Rectangle){0,0, -background.width, background.height}, NPATCH_NINE_PATCH},
+        (Rectangle){floor(param.largura+counter.y),0, param.largura, param.altura},
+        (Vector2){0,0},
+        0,
+        WHITE
+    );
+}
+//=========================================================================================
+/* DesenharJogador: Jogador_t, Rectangle -> void
+  Fun√ß√£o para desenhar o jogador na tela.
+
+Par√¢metros:
   - jogador (Jogador_t): Estrutura contendo os dados do jogador.
-  - source (Rectangle): ¡rea da textura a ser desenhada.
+  - source (Rectangle): √Årea da textura a ser desenhada.
 Objetivo:
   Desenha a textura do jogador na tela.
 */
@@ -341,39 +416,4 @@ Objetivo:
 void DesenhaJogador(Jogador_t jogador, Rectangle source)
 {
     DrawTextureRec(jogador.tex, source, jogador.posicao, WHITE);
-}
-//=========================================================================================
-/* PaginationControl: Scores_t* -> void
-  FunÁ„o para controlar a navegaÁ„o entre p·ginas do leaderboard.
-
-Par‚metros:
-  - leaderboards (Scores_t*): Ponteiro para a estrutura contendo os dados do leaderboard.
-Objetivo:
-  Permite a navegaÁ„o entre as p·ginas do leaderboard utilizando as teclas de seta esquerda e direita.
-*/
-//=========================================================================================
-void PaginationControl(Scores_t *leaderboards)
-{
-  if(IsKeyPressed(KEY_RIGHT))
-    {
-        if(leaderboards->pagina == 4)
-        {
-          leaderboards->pagina = 4;
-        } else
-        {
-          leaderboards->pagina++;
-        }
-  }
-
-  if(IsKeyPressed(KEY_LEFT))
-  {
-        if(leaderboards->pagina == 0)
-        {
-          leaderboards->pagina = 0;
-        }
-        else
-        {
-          leaderboards->pagina--;
-        }
-  }
 }
