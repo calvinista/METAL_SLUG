@@ -13,21 +13,22 @@
 //===================================================
 #define SCREEN_WIDTH 1200 // Largura da tela
 #define SCREEN_HEIGHT 600 // Altura da tela
-#define TITLE "Cyber Inf 2077" // TÌtulo da janela
+#define TITLE "Cyber Inf 2077" // T√≠tulo da janela
 #define FPS 60 // Frames por segundo
 //===================================================
 // DEFINES DO JOGO
 //===================================================
-#define STRING_MAX_SIZE 64 // Quantidade de caracteres que podem estar nas opÁıes do menu
-#define OPCOES_MENU 3 // Quantidade de opÁıes no menu inicial
+#define STRING_MAX_SIZE 64 // Quantidade de caracteres que podem estar nas op√ß√µes do menu
+#define OPCOES_MENU 3 // Quantidade de op√ß√µes no menu inicial
 #define LINHAS 10 // Quantidade de linhas na matriz do mapa
 #define COLUNAS 200 // Quantidade de colunas na matriz do mapa
 #define NOME_TAM_MAX 15 // Tamanho limite do nome do jogador.
-#define TAM 5 //5 melhores pontuaÁıes
+#define TAM 5 //5 melhores pontua√ß√µes
 //===================================================
-// DEFINI«√O DE APELIDO
+// DEFINI√á√ÉO DE APELIDO
 //===================================================
 typedef struct JOGADOR Jogador_t;
+typedef struct PROJETIL Projetil_t;
 typedef struct INIMIGOS Inimigos_t;
 typedef struct BLOCO Bloco_t;
 typedef struct CENA Cena_t;
@@ -35,21 +36,21 @@ typedef struct TELA Tela_t;
 typedef struct FASE Fase_t;
 typedef struct LEADERBOARD Scores_t;
 typedef struct NOME Nome_t;
-//typedef struct RECORD Record;
+typedef struct RECORD Record_t;
 typedef struct LEVELDATA LevelData;
 typedef enum GERENCIADOR_CENA Gerenciador_e;
 //===================================================
-// DEFINI«√O DE ESTRUTURAS
+// DEFINI√á√ÉO DE ESTRUTURAS
 //===================================================
 /* RECORD
-- Armazena informaÁıes de recordes de jogadores para fases especÌficas.
+- Armazena informa√ß√µes de recordes de jogadores para fases espec√≠ficas.
 
 Campos:
-  - level_id (int): Identifica a fase ‡ qual o recorde pertence.
-  - name (char*): Nome do jogador que alcanÁou o recorde.
-  - tries (int): N˙mero de tentativas necess·rias para alcanÁar o recorde.
+  - level_id (int): Identifica a fase √† qual o recorde pertence.
+  - name (char*): Nome do jogador que alcan√ßou o recorde.
+  - tries (int): N√∫mero de tentativas necess√°rias para alcan√ßar o recorde.
 //=========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 typedef struct Record
 {
@@ -58,13 +59,13 @@ typedef struct Record
     int pts;
 }RECORD;
 /* LEVELDATA
-- Armazena os dados de recordes de uma fase especÌfica.
+- Armazena os dados de recordes de uma fase espec√≠fica.
 
 Campos:
   - level_id (int): Identifica a fase.
   - top5 (Record[5]): Lista dos 5 melhores recordes da fase.
 =========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 struct LEVELDATA
 {
@@ -72,16 +73,16 @@ struct LEVELDATA
     RECORD top5[TAM];
 };
 /* LEADERBOARD
-- Gerencia o placar e a interface de usu·rio para exibiÁ„o dos recordes.
+- Gerencia o placar e a interface de usu√°rio para exibi√ß√£o dos recordes.
 
 Campos:
-  - retorno (Rectangle): ¡rea do bot„o de retorno na tela de placar.
-  - reset (Rectangle): ¡rea do bot„o de reset na tela de placar.
-  - fases (LevelData[TAM]): Dados dos recordes das 5 fases disponÌveis.
+  - retorno (Rectangle): √Årea do bot√£o de retorno na tela de placar.
+  - reset (Rectangle): √Årea do bot√£o de reset na tela de placar.
+  - fases (LevelData[TAM]): Dados dos recordes das 5 fases dispon√≠veis.
   - desenhaScore (int): Flag para indicar se o placar deve ser desenhado.
-  - pagina (int): P·gina atual do placar sendo exibida.
+  - pagina (int): P√°gina atual do placar sendo exibida.
 =========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 struct LEADERBOARD
 {
@@ -92,16 +93,16 @@ struct LEADERBOARD
     int pagina;
 };
 /* NOME
-- Gerencia a entrada e exibiÁ„o do nome do jogador.
+- Gerencia a entrada e exibi√ß√£o do nome do jogador.
 
 Campos:
   - nome (char[NOME_TAM_MAX]): Nome do jogador sendo inserido.
-  - contaLetras (int): N˙mero de letras j· inseridas no nome.
-  - contaFrame (int): Contador de frames para animaÁ„o da inserÁ„o de texto.
-  - caixaTexto (Rectangle): ¡rea da caixa de texto na interface.
-  - mouseSobreCaixa (int): Flag para indicar se o mouse est· sobre a caixa de texto.
+  - contaLetras (int): N√∫mero de letras j√° inseridas no nome.
+  - contaFrame (int): Contador de frames para anima√ß√£o da inser√ß√£o de texto.
+  - caixaTexto (Rectangle): √Årea da caixa de texto na interface.
+  - mouseSobreCaixa (int): Flag para indicar se o mouse est√° sobre a caixa de texto.
 =========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 struct NOME
 {
@@ -112,23 +113,23 @@ struct NOME
   int mouseSobreCaixa;
 };
 /* CENA
-- Gerencia a exibiÁ„o das cenas do jogo, como o menu principal.
+- Gerencia a exibi√ß√£o das cenas do jogo, como o menu principal.
 
 Campos:
-  - texTitle (Texture2D): Textura do tÌtulo do jogo.
+  - texTitle (Texture2D): Textura do t√≠tulo do jogo.
   - background (Texture2D): Textura do fundo da cena.
-  - string (char[OPCOES_MENU][STRING_MAX_SIZE]): Textos das opÁıes de menu.
+  - string (char[OPCOES_MENU][STRING_MAX_SIZE]): Textos das op√ß√µes de menu.
   - fontSize (int): Tamanho da fonte para os textos do menu.
   - encerrarJogo (int): Flag para encerrar o jogo.
-  - menuLock (int): Flag para bloquear a navegaÁ„o no menu.
-  - flagNome (int): Flag para indicar se a entrada de nome est· ativa.
-  - hover (int[OPCOES_MENU]): Indica quais botıes do menu est„o sendo "sobrepostos" pelo mouse.
-  - botoes (Rectangle[OPCOES_MENU]): ¡reas dos botıes do menu.
-  - textColor (Color[OPCOES_MENU]): Cores dos textos dos botıes do menu.
+  - menuLock (int): Flag para bloquear a navega√ß√£o no menu.
+  - flagNome (int): Flag para indicar se a entrada de nome est√° ativa.
+  - hover (int[OPCOES_MENU]): Indica quais bot√µes do menu est√£o sendo "sobrepostos" pelo mouse.
+  - botoes (Rectangle[OPCOES_MENU]): √Åreas dos bot√µes do menu.
+  - textColor (Color[OPCOES_MENU]): Cores dos textos dos bot√µes do menu.
   - scores (Scores_t): Dados do placar (LeaderBoards).
   - nome (Nome_t): Dados referente a Cena de input de nome.
 =========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 struct CENA
 {
@@ -150,12 +151,12 @@ struct CENA
 
 Campos:
   - mapa (char[LINHAS][COLUNAS]): Matriz que representa o layout do mapa da fase.
-  - lineSize (int): N˙mero de linhas no mapa.
-  - columnSize (int): N˙mero de colunas no mapa.
+  - lineSize (int): N√∫mero de linhas no mapa.
+  - columnSize (int): N√∫mero de colunas no mapa.
   - tamBloco (int): Tamanho de cada bloco no mapa.
-  - indice (int): Õndice da fase.
+  - indice (int): √çndice da fase.
 =========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 struct FASE
 {
@@ -168,13 +169,13 @@ struct FASE
 };
 
 /* TELA
-- Armazena as dimensıes da tela do jogo.
+- Armazena as dimens√µes da tela do jogo.
 
 Campos:
   - largura (int): Largura da tela.
   - altura (int): Altura da tela.
 =========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 struct TELA
 {
@@ -183,24 +184,25 @@ struct TELA
 };
 
 /* JOGADOR
-- Gerencia os dados do jogador, incluindo fÌsica e estado no jogo.
+- Gerencia os dados do jogador, incluindo f√≠sica e estado no jogo.
 
 Campos:
   - tex (Texture2D): Textura do jogador.
   - velocidade (Vector2): Vetor de velocidade do jogador.
   - gravidade (Vector2): Vetor de gravidade que afeta o jogador.
-  - posicao (Vector2): PosiÁ„o do jogador na tela.
+  - posicao (Vector2): Posi√ß√£o do jogador na tela.
   - tamanho (Vector2): Tamanho do jogador.
-  - pulando (int): Flag para indicar se o jogador est· pulando.
-  - andando (int): Flag para indicar se o jogador est· andando.
-  - atirando (int): Flag para indicar se o jogador est· atirando.
-  - tentativas (int): N˙mero de tentativas realizadas pelo jogador.
+  - pulando (int): Flag para indicar se o jogador est√° pulando.
+  - andando (int): Flag para indicar se o jogador est√° andando.
+  - atirando (int): Flag para indicar se o jogador est√° atirando.
+  - mirando (int): Flag para indicar se o jogador est√° mirando pra cima ou pra baixo.
+  - tentativas (int): N√∫mero de tentativas realizadas pelo jogador.
   - pts (int): Pontos acumulados pelo jogador.
-  - cd (int): Cooldown (tempo de espera) para aÁıes.
+  - cd (int): Cooldown (tempo de espera) para a√ß√µes.
   - faseCompleta (int): Flag para indicar se a fase foi completada.
   - idFase (int): ID da fase atual.
 =========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 struct JOGADOR
 {
@@ -211,6 +213,8 @@ struct JOGADOR
   Vector2 tamanho;
   int pulando;
   int andando;
+  int mirando;
+  int agachado;
   int atirando;
   int tentativas;
   int pts;
@@ -218,24 +222,44 @@ struct JOGADOR
   int faseCompleta;
   int idFase;
 };
+/*PROJETIL:
+- Indica um projetil a ser disparado (seja do jogador ou dos inimigos da fase), assim como seu estado, posi√ß√£o e velocidade horizontal
+
+Campos:
+    - tex(Texture2D): Textura do projetil.
+    - posicao (Vector2): Posi√ß√£o do projetil.
+    - velocidade (Vector2): Velocidade do projetil.
+    - ativo (int): Flag que indica se o projetil est√° ativo ou n√£o.
+=========================================================================================
+Defini√ß√µes:*/
+struct PROJETIL
+{
+  Texture2D tex;
+  Vector2 posicao;
+  Vector2 velocidade;
+  int ativo;
+};
 /* INIMIGOS:
-- Representa um inimigo na fase, assim como sua posiÁ„o na fase e velocidade vertical
+- Representa um inimigo na fase, assim como sua posi√ß√£o na fase e velocidade vertical
 
 Campos:
     - tex(Texture2D): Textura do inimigo.
-    - posicao(Vector2): PosiÁ„o do inimigo na tela.
+    - posicao(Vector2): Posi√ß√£o do inimigo na tela.
     - tamanho(Vector2D): Tamanho do inimigo.
     - velocidade(Vector2): Vetor de velocidade do inimigo.
-    - cd(int): Cooldown, (tempo de espera) para aÁıes.
+    - cd(int): Cooldown, (tempo de espera) para a√ß√µes.
     - idFase(int): ID da fase atual.
 =========================================================================================
-DefiniÁıes:*/
+Defini√ß√µes:*/
 struct INIMIGOS
 {
     Texture2D tex;
     Vector2 posicao;
     Vector2 tamanho;
     Vector2 velocidade;
+    int andando;
+    int mirando;
+    int atirando;
     int cd;
     int idFase;
 };
@@ -244,11 +268,11 @@ struct INIMIGOS
 
 Valores:
   - MENU (1): Menu principal.
-  - SELECAO (2): SeleÁ„o de fases.
+  - SELECAO (2): Sele√ß√£o de fases.
   - JOGO (3): Fase do jogo em andamento.
   - FIM (4): Tela de fim de jogo.
 =========================================================================================
-DefiniÁ„o:
+Defini√ß√£o:
 */
 enum GERENCIADOR_CENA{
   MENU = 1,
