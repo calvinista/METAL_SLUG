@@ -12,7 +12,7 @@
 // Structure Update Controllers
 //=========================================================================================
 void PreencheMenuInicial(Cena_t *cena, Tela_t param);
-void InicializaJogador(Jogador_t *jogador, int fase);
+void InicializaJogador(Jogador_t *jogador, int fase)
 void AtualizaRecordeAtual(Record *novo, Jogador_t ref);
 void AnimationMenu(Cena_t *cena, Vector2 mousePos);
 int MenuInteraction(Cena_t menu, Vector2 mousePos);
@@ -25,10 +25,13 @@ int JogadorEntraNoRanking(Record novo, LevelData *fases, int n);
 //=========================================================================================
 void AtualizarJogador(Jogador_t *jogador, Fase_t mapa);
 void Pulo(Jogador_t *jogador);
-//void Agachar(Jogador_t *jogador);
-//void Mirar(Jogador_t *jogador)
+void Atira(Jogador_t *jogador, Projetil_t *projetil, int *numProjeteis);
+void Agachar(Jogador_t *jogador);
+void Mirar(Jogador_t *jogador);
+void ColetarItens(Jogador_t *jogador, Fase_t *fase);
 void ParallaxCounterControl(Vector2 *counter, Tela_t param);
-int SideCollision(Fase_t mapa, Vector2 jogadorPos);
+void BulletCollision(Projetil_t *projetil, int numProjeteis, Inimigos_t *inimigo, int numInimigos, Fase_t mapa, Jogador_t *jogador);
+int JogadorCollision(Jogador_t *jogador, Inimigos_t *inimigo, int numInimigos, Projetil_t *projeteisInimigos, int numProjeteisInimigos, Fase_t mapa);
 //=========================================================================================
 // Front-End Elements
 //=========================================================================================
