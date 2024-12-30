@@ -5,14 +5,14 @@
 
 //=========================================================================================
 /* Pulo: Jogador_t* -> void
-  Função para gerenciar o pulo do jogador.
+    Função para gerenciar o pulo do jogador.
 
-Parâmetros:
-  - jogador (Jogador_t*): Ponteiro para a estrutura do jogador.
-Descrição:
-  A função verifica se a tecla de pulo (espaço) foi pressionada e se o jogador não
-  está pulando atualmente, aplicando a física de pulo. Também atualiza a rotação
-  do jogador durante o pulo.
+    Parâmetros:
+    - jogador (Jogador_t*): Ponteiro para a estrutura do jogador.
+    Descrição:
+    A função verifica se a tecla de pulo (espaço) foi pressionada e se o jogador não
+    está pulando atualmente, aplicando a física de pulo. Também atualiza a rotação
+    do jogador durante o pulo.
 */
 //=========================================================================================
 void Pulo(Jogador_t *jogador){
@@ -72,10 +72,11 @@ void Agachar(Jogador_t *jogador)
 
     - jogador (Jogador_t*): Ponteiro p/ estrutura do jogador.
 
-    Descrição: Função responsável por verificar as teclas direcionais (P/ CIMA e P/ BAIXO) pressionadas a fim de definir a direção da mira.
+    Descrição:
+    Função responsável por verificar as teclas direcionais (P/ CIMA e P/ BAIXO) pressionadas a fim de definir a direção da mira.
 */
 //=========================================================================================
-void Mirar(Jogador_t *jogador)
+void Mira(Jogador_t *jogador)
 {
     if(IsKeyDown(KEY_UP))
     {
@@ -93,9 +94,9 @@ void Mirar(Jogador_t *jogador)
 
     Parâmetros:
 
-  - jogador (Jogador_t*): Ponteiro p/ estrutura do jogador.
-  - projetil (Projetil_t*): Ponteiro p/ a estrutura do Disparo
-  - numProjeteis (int*): Contador de projeteis, que mantêm o número de projéteis ativo,
+    - jogador (Jogador_t*): Ponteiro p/ estrutura do jogador.
+    - projetil (Projetil_t*): Ponteiro p/ a estrutura do Disparo
+    - numProjeteis (int*): Contador de projeteis, que mantêm o número de projéteis ativo,
     que é incrementado cada vez que um novo é efetuado.
 
     Descrição:
@@ -184,7 +185,8 @@ void Atira(Jogador_t *jogador, Projetil_t *projetil,  int *numProjeteis)
     que é incrementado cada vez que um novo é efetuado.
     - tela (*Tela_t): Ponteiro p/ a estrutura tela.
 
-    Descrição: A função faz o gerenciamento dos disparos efetuados pelo jogador e inimigos durante o jogo, incluindo velocidade
+    Descrição:
+    A função faz o gerenciamento dos disparos efetuados pelo jogador e inimigos durante o jogo, incluindo velocidade
 */
 //=========================================================================================
 void AtualizarDisparo(Jogador_t *jogador,Projetil_t *projetil, int *numProjeteis, Tela_t *tela)
@@ -345,19 +347,21 @@ void BulletCollision(Projetil_t *projetil, int numProjeteis, Inimigos_t *inimigo
 }
 //=========================================================================================
 /* SideCollision: Fase_t, Vector2 -> int
-  Função para detectar colisões laterais do jogador com o mapa.
+    Função para detectar colisões laterais do jogador com o mapa.
 
-Parâmetros:
-  - mapa (Fase_t): Estrutura contendo o mapa da fase atual.
-  - jogadorPos (Vector2): Posição atual do jogador.
-Retorno:
-  - int: Um valor inteiro que indica o resultado da colisão:
+    Parâmetros:
+    - mapa (Fase_t): Estrutura contendo o mapa da fase atual.
+    - jogadorPos (Vector2): Posição atual do jogador.
+
+    Retorno:
+    - int: Um valor inteiro que indica o resultado da colisão:
     - 1: colisão c/ inimigo.
     - 2: colisão c/ projétil inimigo.
     - 3: O jogador coletou um item.
     - 0: Nenhuma colisão relevante.
-Descrição:
-  A função verifica se o jogador colidiu com obstáculos ou objetos especiais no mapa,
+
+    Descrição:
+    A função verifica se o jogador colidiu com obstáculos ou objetos especiais no mapa,
   determinando o efeito dessa colisão (morte, término da fase ou coleta de item).
 */
 //=========================================================================================
@@ -469,16 +473,16 @@ Vector2 ProcuraJogador(Fase_t mapa, int tamBloco)
 }
 //=========================================================================================
 /* UpdatePlayer: Jogador_t*, Fase_t -> void
-  Função para atualizar a posição e estado do jogador durante o jogo.
+    Função para atualizar a posição e estado do jogador durante o jogo.
 
-Parâmetros:
-  - jogador (Jogador_t*): Ponteiro para a estrutura do jogador que será atualizada.
-  - mapa (Fase_t): Estrutura contendo o mapa da fase atual.
+    Parâmetros:
+    - jogador (Jogador_t*): Ponteiro para a estrutura do jogador que será atualizada.
+    - mapa (Fase_t): Estrutura contendo o mapa da fase atual.
 
-Descrição:
-  A função gerencia a movimentação do jogador, incluindo física de pulo e gravidade,
-  colisão com obstáculos no mapa e coleta de itens. Também atualiza o estado do jogador
-  conforme ele avança na fase ou morre.
+    Descrição:
+    A função gerencia a movimentação do jogador, incluindo física de pulo e gravidade,
+    colisão com obstáculos no mapa e coleta de itens. Também atualiza o estado do jogador
+    conforme ele avança na fase ou morre.
 */
 //=========================================================================================
 void UpdatePlayer(Jogador_t *jogador, Fase_t mapa, Inimigos_t *inimigos, int numInimigos, Projetil_t *projeteisInimigos, int numProjeteisInimigos)
@@ -508,7 +512,7 @@ void UpdatePlayer(Jogador_t *jogador, Fase_t mapa, Inimigos_t *inimigos, int num
     if (collisionResult == 1)
     {
         jogador->posicao = ProcuraJogador(mapa, mapa.tamBloco); // Reseta posição inicial
-        jogador->tentativas++; // Incrementa tentativas
+        jogador->tentativas--; // Incrementa tentativas
     } else if (collisionResult == 2)
     {
         jogador->posicao = ProcuraJogador(mapa, mapa.tamBloco); // Reseta posição inicial
@@ -567,15 +571,91 @@ void UpdatePlayer(Jogador_t *jogador, Fase_t mapa, Inimigos_t *inimigos, int num
     }
 }
 //=========================================================================================
-/* InicializaJogador: Jogador_t*, int -> void
-  Função para inicializar os dados do jogador no início de uma fase.
+/*ColetaItens: Jogador_t *jogador, Fase_t *mapa -> void
 
-Parâmetros:
-  - jogador (Jogador_t*): Ponteiro para a estrutura do jogador.
-  - fase (int): ID da fase atual.
-Objetivo:
-  A função reinicia os dados do jogador, como a flag de pulo, o cooldown (coleta de item), e o número
-  de tentativas, preparando para iniciar uma nova fase.
+    Faz o gerenciamento da coleta de itens e acrescenta os valores dos itens coletados a pontuação do jogador.
+
+    Parâmetros:
+    - jogador (Jogador_t*): Ponteiro p/ a estrutura jogador.
+    - mapa (Fase_t*): Ponteiro p/ o campo mapa da estrutura fase.
+
+    Descrição:
+
+    Verifica a coleta dos itens da fase e acrescenta os pontos dos itens coletados a pontuação do jogador, onde:
+
+    - Power-ups ('W', 75pts).
+    - Civis ('C', 200pts).
+    - Animais ('A', 250pts).
+*/
+//=========================================================================================
+void ColetaItens(Jogador_t *jogador, Fase_t *mapa)
+{
+    for (int i = 0; i < mapa->lineSize; i++)
+    {
+        for (int j = 0; j < mapa->columnSize; j++)
+        {
+            char item = mapa->mapa[i][j];
+
+            if (item == 'W' || item == 'A' || item == 'C')
+            {
+                Vector2 itemPos =
+                { j * mapa->tamBloco,
+                    i * mapa->tamBloco
+                };
+
+                Rectangle itemRect =
+                {
+                    itemPos.x, itemPos.y,
+                    mapa->tamBloco, mapa->tamBloco
+                };
+
+                Rectangle jogadorRect =
+                {
+                    jogador->posicao.x, jogador->posicao.y,
+                    jogador->tamanho.x, jogador->tamanho.y
+                };
+
+
+                if (CheckCollisionRecs(jogadorRect, itemRect))
+                {
+                    switch (item)
+                    {
+                        case 'W':
+                            if (!jogador->mirando)
+                            {
+                                jogador->mirando = 1; // Marca que o jogador pegou o power-up
+                            }
+                            else
+                            {
+                                jogador->pts += 75;
+                            }
+                            break;
+
+                        case 'A':
+                            jogador->pts += 200;
+                            break;
+                        case 'C':
+                            jogador->pts += 250;
+                            break;
+                    }
+
+                    mapa->mapa[i][j] = ' ';
+                }
+            }
+        }
+    }
+}
+//=========================================================================================
+/* InicializaJogador: Jogador_t*, int -> void
+    Função para inicializar os dados do jogador no início de uma fase.
+
+    Parâmetros:
+    - jogador (Jogador_t*): Ponteiro para a estrutura do jogador.
+    - fase (int): ID da fase atual.
+
+    Objetivo:
+    A função reinicia os dados do jogador, como a flag de pulo, o cooldown (coleta de item), e o número
+    de tentativas, preparando para iniciar uma nova fase.
 */
 //=========================================================================================
 void InicializaJogador(Jogador_t *jogador, int fase)
@@ -583,6 +663,7 @@ void InicializaJogador(Jogador_t *jogador, int fase)
     jogador->faseCompleta = 0;
     jogador->idFase = fase;
     jogador->andando = 0;
+    jogador->agachado = 0;
     jogador->pulando = 0;
     jogador->mirando = 1;
     jogador->atirando = 0;
@@ -590,3 +671,6 @@ void InicializaJogador(Jogador_t *jogador, int fase)
     jogador->tentativas = 0;
     jogador->pts = 0;
 }
+
+
+
